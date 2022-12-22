@@ -1,0 +1,29 @@
+{
+  "name": "teamprofile-gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michelletrn/teamprofile-gen.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michelletrn/teamprofile-gen/issues"
+  },
+  "homepage": "https://github.com/michelletrn/teamprofile-gen#readme",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  },
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  }
+}
