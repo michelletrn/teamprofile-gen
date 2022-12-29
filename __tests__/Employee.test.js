@@ -1,16 +1,27 @@
 // Import Employee class with require()
+const { exportAllDeclaration } = require('@babel/types');
+//const { it } = require('node:test');
 const Employee = require('../lib/Employee');
 
 // Test instantiate Employee instance
-test("", () => {
+test("Employee class", () => {
   // Instantiate the Employee class with new operator to create an object and assign it to an new variable
+  it('should create an array out of an employees inputted information')
+    const employee = new Employee('Michelle');
   // Expect the type of the variable to be the "object" data type
+    expect(employee.info).toEqual(
+      expect.arrayContaining([objectContaining({name: 'Michelle', id: 10000, email: 'michelle@test.com', role: 'Intern'})])
+    )
 });
 
 // Test setting name of an employee
-test("", () => {
+test("employeeName", () => {
   // Assign the name of an employee to a new variable
-  // Instantiate the Employee class, passing the variable of the employee name as an augument, to create an object and assign it to an new variable
+  const name = new Employee("Nicole");
+  // Instantiate the Employee class, passing the variable of the employee name as an augument, to create an object and assign it to a new variable
+  it('should take the inputted name as an arguement and assigns the arguement as the name', () => {
+    expect(new Employee.name.toEqual("Nicole"));
+  })
   // Expect the value of the name property of the object to be equal to the value of the variable of the employee name
 });
 
@@ -55,3 +66,4 @@ test("", () => {
   // Instantiate the Employee class, passing an employee name and an id and an email as auguments, to create an object and assign it to an new variable
   // Expect getRole() to return the role to be equal to the value of the role variable
 });
+

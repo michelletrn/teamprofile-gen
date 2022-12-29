@@ -1,31 +1,40 @@
 // 1.
 // import manager, engineer, intern files with require()
 // import inquirer with require()
-// import path with require()??
+// import path with require()
 // import fs with require()
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const inquirer = require('inquirer');
-// import path with require()??
+const path = require('path');
 const fs = require('fs');
 
 // 2.
 // import page-template.js from subfoler src with require and assign it to a variable to be called later to render html
+const template = require('./src/page-template');
 
 // 3.
 // create variable to hold the path to dist subfolder using path lib resolve method
+const outputDir = path.resolve(__dirname, "dist");
 // create variable to hold the path to team.html using path lib join method
+const outputPath = path.join(outputDir, "team-profile.html");
 
 // 4.
-// create an empty employee memeber array variable to store the employee members, manager, engineers, and interns
+// create an empty employee member array variable to store the employee members, manager, engineers, and interns
+const employeeMembers = [];
 // create an empty employee id array to store the employee ids
+// const employeeIds = []; do we even need????
 
 // 5.
-// print user of usage
+// print user of usage???????????????
 
 // 6.
 // make call to create manager function to start the main process
+const init = async() => {
+    await createManager();
+
+}
 
 // 7.
 // create manager function
@@ -34,6 +43,44 @@ const fs = require('fs');
 // - push the manager object to the employee member array
 // - push the manager id to the employee id array
 // - make call to the create team function
+const createManager = async () => {
+
+    const managerQ = [
+        {
+            type: 'input',
+            message: 'Enter manager name:',
+            name: 'name'
+
+        },
+        {
+            type: 'input',
+            message: 'Enter employee ID:',
+            name: 'id'
+
+        },
+        {
+            type: 'input',
+            message: 'Enter office number:',
+            name: 'officeNumber'
+
+        },
+        {
+            type: 'input',
+            message: 'Enter email:',
+            name: 'email'
+        },
+        
+    ];
+
+    inquirer.prompt(managerQ)
+        .then((data) => {
+            const manager = new Manager(data);
+            employeeMembers.push(manager);
+            addTeamMember();
+        });
+
+}
+
 
 // 8.
 // create team function
@@ -42,6 +89,26 @@ const fs = require('fs');
 // - make call to add-engineer-function if the choice is engineer
 // - make call to add-intern-function if choice is intern
 // - make call to build-team function if choice is end of adding employee
+const addTeamMember = async() => {
+    inquirer.prompt({
+        type: 'list',
+        message: 'Please add your team member:',
+        name: 'addEmployee',
+        choices: ['Engineer', 'Intern', 'None']
+    })
+    .then((data => {
+        if (data.addEmployee === 'Engineer') {
+            createEngineer();
+        } 
+        if (data.addEmployee === 'Intern') {
+            createIntern();
+        } 
+        else if (data.addEmployee === 'None') {
+            buildTeam();
+        }
+        
+    }))
+}
 
 // 8.
 // add engineer function
@@ -50,14 +117,88 @@ const fs = require('fs');
 // - push engineer object to employee member array
 // - push engineer id to employee id array
 // - make call to create team function
+const createEngineer = async () => {
+
+    const engineerQ = [
+        {
+            type: 'input',
+            message: 'Enter Engineer name:',
+            name: 'name'
+
+        },
+        {
+            type: 'input',
+            message: 'Enter employee ID:',
+            name: 'id'
+
+        },
+        {
+            type: 'input',
+            message: 'Enter email:',
+            name: 'email'
+        },
+        {
+            type: 'input',
+            message: 'Enter Github username:',
+            name: 'github'
+        }
+        
+    ];
+
+    inquirer.prompt(engineerQ)
+        .then((data) => {
+            const engineer = new Engineer(data);
+            employeeMembers.push(engineer);
+            addTeamMember();
+        });
+
+}
+
 
 // 9.
 // add intern function
 // - prompt user with questions for intern name, id, email, and school
-// - in .then callback create intern object by instantiating Intern class instance passing name, id, email, and school as arguments to class constructor
+// - in .then callback create intern object by instantiating Intern class instance passing name, id, email, and school as arguments to class constructor 
 // - push intern object to employee member array
 // - push intern id to employee id array
 // - make call to create team function
+const createIntern = async() => {
+
+    const internQ = [
+        {
+            type: 'input',
+            message: 'Enter Intern name:',
+            name: 'name'
+
+        },
+        {
+            type: 'input',
+            message: 'Enter employee ID:',
+            name: 'id'
+
+        },
+        {
+            type: 'input',
+            message: 'Enter email:',
+            name: 'email'
+        },
+        {
+            type: 'input',
+            message: 'Enter school:',
+            name: 'school'
+        }
+        
+    ];
+
+    inquirer.prompt(internQ)
+        .then((data) => {
+            const intern = new Intern(data);
+            employeeMembers.push(intern);
+            addTeamMember();
+        });
+
+}
+
 
 // 10.
 // build team function
@@ -65,5 +206,14 @@ const fs = require('fs');
 // - if not exist, create the dist subfolder
 // - make call to imported render function passing employee member array as argument and assign returned html to a variable
 // - make call to fs write file function passing the html file path, html variable
+const buildTeam = async() => {
+    if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir)
+    }
+    // console.log('Employee: ' + JSON.stringify(employeeMembers));
+    fs.writeFileSync(outputPath, template(employeeMembers), (err) => 
+    err ? console.log(err) : console.log('Team Profile Generated...'));
+}
 
+createManager(); 
 
