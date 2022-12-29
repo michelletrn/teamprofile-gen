@@ -1,6 +1,6 @@
 // Import Employee class with require()
 const { exportAllDeclaration } = require('@babel/types');
-//const { it } = require('node:test');
+// const { it } = require('node:test');
 const Employee = require('../lib/Employee');
 
 // Test instantiate Employee instance
@@ -10,7 +10,7 @@ test("Employee class", () => {
     const employee = new Employee('Michelle');
   // Expect the type of the variable to be the "object" data type
     expect(employee.info).toEqual(
-      expect.arrayContaining([objectContaining({name: 'Michelle', id: 10000, email: 'michelle@test.com', role: 'Intern'})])
+      expect.arrayContaining([objectContaining({name: 'Michelle', id: 10000, email: 'michelle@test.com'})])
     )
 });
 
