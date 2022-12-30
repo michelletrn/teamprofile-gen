@@ -27,13 +27,13 @@ const employeeMembers = [];
 // const employeeIds = []; do we even need????
 
 // 5.
-// print user of usage???????????????
+// print user of usage
+console.log('\nTeam Profile Generator \nTo generate your team, please answer the prompts below:\n')
 
 // 6.
 // make call to create manager function to start the main process
 const init = async() => {
     await createManager();
-
 }
 
 // 7.
@@ -44,7 +44,7 @@ const init = async() => {
 // - push the manager id to the employee id array
 // - make call to the create team function
 const createManager = async () => {
-
+    console.log('=============== Please enter manager info... ===============');
     const managerQ = [
         {
             type: 'input',
@@ -60,21 +60,19 @@ const createManager = async () => {
         },
         {
             type: 'input',
-            message: 'Enter office number:',
-            name: 'officeNumber'
-
-        },
-        {
-            type: 'input',
             message: 'Enter email:',
             name: 'email'
         },
-        
+        {
+            type: 'input',
+            message: 'Enter office number:',
+            name: 'officeNumber'
+        }
     ];
 
     inquirer.prompt(managerQ)
         .then((data) => {
-            const manager = new Manager(data);
+            const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
             employeeMembers.push(manager);
             addTeamMember();
         });
@@ -94,7 +92,7 @@ const addTeamMember = async() => {
         type: 'list',
         message: 'Please add your team member:',
         name: 'addEmployee',
-        choices: ['Engineer', 'Intern', 'None']
+        choices: ['Engineer', 'Intern', 'None, team completed']
     })
     .then((data => {
         if (data.addEmployee === 'Engineer') {
@@ -103,7 +101,7 @@ const addTeamMember = async() => {
         if (data.addEmployee === 'Intern') {
             createIntern();
         } 
-        else if (data.addEmployee === 'None') {
+        else if (data.addEmployee === 'None, team completed') {
             buildTeam();
         }
         
@@ -118,7 +116,7 @@ const addTeamMember = async() => {
 // - push engineer id to employee id array
 // - make call to create team function
 const createEngineer = async () => {
-
+    console.log('\n=============== Please enter engineer info... ===============');
     const engineerQ = [
         {
             type: 'input',
@@ -147,7 +145,7 @@ const createEngineer = async () => {
 
     inquirer.prompt(engineerQ)
         .then((data) => {
-            const engineer = new Engineer(data);
+            const engineer = new Engineer(data.name, data.id, data.email, data.github);
             employeeMembers.push(engineer);
             addTeamMember();
         });
@@ -163,7 +161,7 @@ const createEngineer = async () => {
 // - push intern id to employee id array
 // - make call to create team function
 const createIntern = async() => {
-
+    console.log('\n=============== Please enter intern info... ===============');
     const internQ = [
         {
             type: 'input',
@@ -192,7 +190,7 @@ const createIntern = async() => {
 
     inquirer.prompt(internQ)
         .then((data) => {
-            const intern = new Intern(data);
+            const intern = new Intern(data.name, data.id, data.email, data.school);
             employeeMembers.push(intern);
             addTeamMember();
         });
@@ -206,14 +204,15 @@ const createIntern = async() => {
 // - if not exist, create the dist subfolder
 // - make call to imported render function passing employee member array as argument and assign returned html to a variable
 // - make call to fs write file function passing the html file path, html variable
-const buildTeam = async() => {
+function buildTeam() {
     if (!fs.existsSync(outputDir)) {
-        fs.mkdirSync(outputDir)
+        fs.mkdirSync(outputDir);
     }
-    // console.log('Employee: ' + JSON.stringify(employeeMembers));
-    fs.writeFileSync(outputPath, template(employeeMembers), (err) => 
-    err ? console.log(err) : console.log('Team Profile Generated...'));
+    console.log('Employee: ' + JSON.stringify(employeeMembers));
+    fs.writeFileSync(outputPath, template(employeeMembers), 'utf-8');
+    console.log('\nTeam Profile Generated - check dist folder... ');
+    console.log('============ Thank you for using Team Profile Generator! ============\n');
 }
 
-createManager(); 
+init();
 
