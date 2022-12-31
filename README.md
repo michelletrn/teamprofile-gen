@@ -23,8 +23,8 @@
   Instructions for use
   - Open file in integrated terminal
   - Run 'npm i' (this command will install Inquirer and Jest)
-  - Run 'npm start' and answer all questions to build team profile
-  - Once user is finished adding team members, an HTML file should be created under 'dist/generated-html' folder.
+  - Run 'npm start' or 'node index.js' and answer all questions to build team profile
+  - Once user is finished adding team members, an HTML file should be created under 'dist/generated-html' folder
 
   Github repo: https://github.com/michelletrn/teamprofile-gen
 
