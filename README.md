@@ -24,14 +24,14 @@
   - Open file in integrated terminal
   - Run 'npm i' (this command will install Inquirer and Jest)
   - Run 'npm start' and answer all questions to build team profile
-  - Once user is finished adding team members, an HTML file should be created under 'dist/generated-html' folder
+  - Once user is finished adding team members, an HTML file should be created under 'dist/generated-html' folder.
 
-  github repo: https://github.com/michelletrn/teamprofile-gen
+  Github repo: https://github.com/michelletrn/teamprofile-gen
 
   Here is a screen shot of a generated team profile page:
   ![screenshot](./assets/teamgen_screenshot.png)
 
-  Demo video link (Can also be found in asssets folder): https://drive.google.com/file/d/19n6pigVj987CqOMJbJ2Qh8hqZc4mxx9f/view
+  Demo video link (also found in asssets folder): https://drive.google.com/file/d/19n6pigVj987CqOMJbJ2Qh8hqZc4mxx9f/view
  
   ## License
   MIT

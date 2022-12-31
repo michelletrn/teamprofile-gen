@@ -1,3 +1,7 @@
+body {
+    background-color: rgb(241, 247, 255);
+}
+
 .team-title {
     text-align: center;
     padding-top: 1%;
@@ -22,6 +26,7 @@
     padding: 0;
     height: 200px;
     border-radius: 5px;
+    background-color: rgb(255, 255, 255);
 }
 
 .role {
