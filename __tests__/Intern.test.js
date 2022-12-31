@@ -1,5 +1,6 @@
 const Intern = require('../lib/Intern');
 
+
 test("intern class", () => {
     const test_e = [{name: "Nick", id: 1, email: "nick@test.com", school: "university"}];
     const intern = new Intern(test_e);

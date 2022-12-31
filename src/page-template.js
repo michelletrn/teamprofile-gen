@@ -72,7 +72,7 @@ const generateHTML = team => {
             .map(intern => internHTML(intern))
     );
 
-    // call join method on employee html array to convert it to html string and return it to the caller
+    // join method on employee html array to convert it to html string and return it to the caller
     //console.log(team); //logs employeeMembers from index
     return html.join("");
 

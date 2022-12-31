@@ -1,5 +1,6 @@
 const Manager = require('../lib/Manager');
 
+
 test("if manager name is properly set", () => {
     const manager = new Manager("Nick", 1, "nick@test.com", 1213444);
     expect(manager.name).toBe("Nick");
